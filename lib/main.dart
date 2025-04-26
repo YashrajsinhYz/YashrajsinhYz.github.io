@@ -3,8 +3,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:portfolio/constants/colors.dart';
 import 'package:portfolio/constants/strings.dart';
 import 'package:portfolio/sections/about_section.dart';
-import 'package:portfolio/sections/project_section.dart';
 import 'package:portfolio/sections/experience_section.dart';
+import 'package:portfolio/sections/project_section.dart';
 
 void main() {
   runApp(const MyPortfolioApp());
@@ -41,7 +41,25 @@ class _PortfolioHomeState extends State<PortfolioHome> {
         // ContactSection(),
       ];
 
-  int currentSection = 1;
+  List<Map> sectionsMap = [
+    {
+      "id": 0,
+      "title": "About",
+      "sectionWidget": AboutSection(),
+    },
+    {
+      "id": 1,
+      "title": "Experience",
+      "sectionWidget": ExperienceSection(),
+    },
+    {
+      "id": 2,
+      "title": "Project",
+      "sectionWidget": ProjectSection(),
+    },
+  ];
+
+  int currentSection = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -225,7 +243,7 @@ class _PortfolioHomeState extends State<PortfolioHome> {
           children: [
             // Tab Bar View
             Container(
-              child: sections.elementAt(currentSection),
+              child: sectionsMap[currentSection]["sectionWidget"],
             ),
             // Tab Bar : HomeSection, AboutSection, ProjectsSection, ContactSection
             Align(
@@ -247,69 +265,34 @@ class _PortfolioHomeState extends State<PortfolioHome> {
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    GestureDetector(
-                      child: Flexible(
-                          flex: 1,
-                          child: Text("About",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w700,
-                                  color: currentSection == 0
-                                      ? Colors.blueAccent
-                                      : null))),
-                      onTap: () {
-                        currentSection = 0;
-                        setState(() {});
-                      },
-                    ),
-                    GestureDetector(
-                      child: Flexible(
-                          flex: 1,
-                          child: Text("Resume",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w700,
-                                  color: currentSection == 1
-                                      ? Colors.blueAccent
-                                      : null))),
-                      onTap: () {
-                        currentSection = 1;
-                        setState(() {});
-                      },
-                    ),
-                    GestureDetector(
-                      child: Flexible(
-                          flex: 1,
-                          child: Text("Portfolio",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w700,
-                                  color: currentSection == 2
-                                      ? Colors.blueAccent
-                                      : null))),
-                      onTap: () {
-                        currentSection = 2;
-                        setState(() {});
-                      },
-                    ),
-                    GestureDetector(
-                      child: Flexible(
-                          flex: 1,
-                          child: Text("Contact",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w700,
-                                  color: currentSection == 3
-                                      ? Colors.blueAccent
-                                      : null))),
-                      onTap: () {
-                        // currentSection = 0;
-                        // setState(() {});
-                      },
-                    ),
-                  ],
+                  children: sectionsMap
+                      .map<Widget>((item) => sectionsWidget(
+                            id: item["id"],
+                            title: item["title"],
+                          ))
+                      .toList(),
                 ),
               ),
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  /// Section Panel Elements
+  Widget sectionsWidget({int id = 0, String title = ""}) {
+    return Flexible(
+      flex: 1,
+      child: GestureDetector(
+        onTap: () {
+          currentSection = id;
+          setState(() {});
+        },
+        child: Text(title,
+            style: TextStyle(
+                fontWeight: FontWeight.w700,
+                color: currentSection == id ? Colors.blueAccent : null)),
       ),
     );
   }

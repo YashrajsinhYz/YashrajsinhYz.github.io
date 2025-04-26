@@ -91,40 +91,35 @@ class InfoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Flexible(
-      child: Container(
-        width: 450,
-        padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          color: const Color(0xFF1E1E1E),
-          borderRadius: BorderRadius.circular(12),
-          boxShadow: const [
-            BoxShadow(
-                color: Colors.black26, blurRadius: 10, offset: Offset(0, 4))
-          ],
-        ),
-        child: Flexible(
-          child: Row(
-            children: [
-              SvgPicture.asset('images/Flutter.svg', width: 50, height: 50),
-              const SizedBox(width: 16),
-              Flexible(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(title,
-                        style: const TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 16)),
-                    const SizedBox(height: 8),
-                    Text(subtitle,
-                        style: const TextStyle(
-                            fontSize: 14, overflow: TextOverflow.visible)),
-                  ],
-                ),
-              ),
-            ],
+    return Container(
+      width: 450,
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: const Color(0xFF1E1E1E),
+        borderRadius: BorderRadius.circular(12),
+        boxShadow: const [
+          BoxShadow(color: Colors.black26, blurRadius: 10, offset: Offset(0, 4))
+        ],
+      ),
+      child: Row(
+        children: [
+          SvgPicture.asset('images/Flutter.svg', width: 50, height: 50),
+          const SizedBox(width: 16),
+          Flexible(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(title,
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 16)),
+                const SizedBox(height: 8),
+                Text(subtitle,
+                    style: const TextStyle(
+                        fontSize: 14, overflow: TextOverflow.visible)),
+              ],
+            ),
           ),
-        ),
+        ],
       ),
     );
   }
