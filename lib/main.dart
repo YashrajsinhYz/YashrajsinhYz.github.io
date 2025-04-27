@@ -18,7 +18,7 @@ class MyPortfolioApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       color: Colors.blue,
-      title: 'My Portfolio',
+      title: "My Portfolio",
       debugShowCheckedModeBanner: false,
       theme: ThemeData.dark(useMaterial3: true),
       home: const PortfolioHome(),
@@ -179,8 +179,8 @@ class _PortfolioHomeState extends State<PortfolioHome> {
 
   Widget contactWidget(
       {dynamic icon,
-      String label = '',
-      String value = '',
+      String label = "",
+      String value = "",
       required BuildContext context}) {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 8, horizontal: 10),
@@ -227,13 +227,13 @@ class _PortfolioHomeState extends State<PortfolioHome> {
 
   Future<void> launchBasedOnLabel(
       String label, String value, BuildContext context) async {
-    String url = '';
+    String url = "";
     if (label == "EMAIL") {
-      url = 'mailto:$value';
+      url = "mailto:$value";
     } else if (label == "PHONE") {
-      url = 'tel:$value';
+      url = "tel:$value";
     } else if (label == "LINKEDIN") {
-      url = value.startsWith('http') ? value : 'https://$value';
+      url = value.startsWith("http") ? value : "https://$value";
     }
 
     final Uri uri = Uri.parse(url);
@@ -243,7 +243,7 @@ class _PortfolioHomeState extends State<PortfolioHome> {
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Could not launch $label'),
+          content: Text("Could not launch $label"),
           duration: Duration(seconds: 3),
           behavior: SnackBarBehavior.floating,
         ),
