@@ -5,6 +5,7 @@ import 'package:portfolio/constants/strings.dart';
 import 'package:portfolio/sections/about_section.dart';
 import 'package:portfolio/sections/experience_section.dart';
 import 'package:portfolio/sections/project_section.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 void main() {
   runApp(const MyPortfolioApp());
@@ -33,14 +34,7 @@ class PortfolioHome extends StatefulWidget {
 }
 
 class _PortfolioHomeState extends State<PortfolioHome> {
-  List<Widget> get sections => [
-        AboutSection(),
-        ExperienceSection(),
-        ProjectSection(),
-        // ProjectsSection(),
-        // ContactSection(),
-      ];
-
+  int currentSection = 0;
   List<Map> sectionsMap = [
     {
       "id": 0,
@@ -58,8 +52,6 @@ class _PortfolioHomeState extends State<PortfolioHome> {
       "sectionWidget": ProjectSection(),
     },
   ];
-
-  int currentSection = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -107,7 +99,8 @@ class _PortfolioHomeState extends State<PortfolioHome> {
                   size: 18,
                 ),
                 label: "EMAIL",
-                value: "zalayashraj110@gmail.com"),
+                value: "zalayashraj110@gmail.com",
+                context: context),
             // Row : Phone no. Image + (Column : Phone + Number)
             contactWidget(
                 icon: Icon(
@@ -115,21 +108,24 @@ class _PortfolioHomeState extends State<PortfolioHome> {
                   size: 18,
                 ),
                 label: "PHONE",
-                value: "+91 97120 *****"),
+                value: "+91 97120 05396",
+                context: context),
             contactWidget(
                 icon: Icon(
                   Icons.link,
                   size: 18,
                 ),
                 label: "LINKEDIN",
-                value: "linkedin.com/yashrajsinh-zala"),
+                value: "linkedin.com/in/yashrajsinh-zala",
+                context: context),
             contactWidget(
                 icon: Icon(
                   Icons.link,
                   size: 18,
                 ),
                 label: "GITHUB",
-                value: "github.com/YashrajsinhYz"),
+                value: "github.com/YashrajsinhYz",
+                context: context),
             // socialMediaWidget(),
           ],
         ),
@@ -181,7 +177,11 @@ class _PortfolioHomeState extends State<PortfolioHome> {
     );
   }
 
-  Widget contactWidget({dynamic icon, String label = '', String value = ''}) {
+  Widget contactWidget(
+      {dynamic icon,
+      String label = '',
+      String value = '',
+      required BuildContext context}) {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 8, horizontal: 10),
       child: Row(
@@ -196,29 +196,59 @@ class _PortfolioHomeState extends State<PortfolioHome> {
                     color: Colors.black26, blurRadius: 10, offset: Offset(0, 4))
               ],
             ),
-            child: Card(
-              child: icon,
-            ),
+            child: Card(child: icon),
           ),
           SizedBox(width: 10),
           Flexible(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  label,
-                  style: TextStyle(fontSize: 10, color: Colors.grey),
+            child: MouseRegion(
+              cursor: SystemMouseCursors.click,
+              child: GestureDetector(
+                onTap: () => launchBasedOnLabel(label, value, context),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      label,
+                      style: TextStyle(fontSize: 10, color: Colors.grey),
+                    ),
+                    Text(
+                      value,
+                      style: TextStyle(overflow: TextOverflow.ellipsis),
+                    )
+                  ],
                 ),
-                Text(
-                  value,
-                  style: TextStyle(overflow: TextOverflow.ellipsis),
-                )
-              ],
+              ),
             ),
           )
         ],
       ),
     );
+  }
+
+  Future<void> launchBasedOnLabel(
+      String label, String value, BuildContext context) async {
+    String url = '';
+    if (label == "EMAIL") {
+      url = 'mailto:$value';
+    } else if (label == "PHONE") {
+      url = 'tel:$value';
+    } else if (label == "LINKEDIN") {
+      url = value.startsWith('http') ? value : 'https://$value';
+    }
+
+    final Uri uri = Uri.parse(url);
+
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Could not launch $label'),
+          duration: Duration(seconds: 3),
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
+    }
   }
 
   Widget socialMediaWidget() {
@@ -284,15 +314,18 @@ class _PortfolioHomeState extends State<PortfolioHome> {
   Widget sectionsWidget({int id = 0, String title = ""}) {
     return Flexible(
       flex: 1,
-      child: GestureDetector(
-        onTap: () {
-          currentSection = id;
-          setState(() {});
-        },
-        child: Text(title,
-            style: TextStyle(
-                fontWeight: FontWeight.w700,
-                color: currentSection == id ? Colors.blueAccent : null)),
+      child: MouseRegion(
+        cursor: SystemMouseCursors.click,
+        child: GestureDetector(
+          onTap: () {
+            currentSection = id;
+            setState(() {});
+          },
+          child: Text(title,
+              style: TextStyle(
+                  fontWeight: FontWeight.w700,
+                  color: currentSection == id ? Colors.blueAccent : null)),
+        ),
       ),
     );
   }

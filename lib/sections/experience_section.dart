@@ -14,8 +14,10 @@ class ExperienceSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text('Experience',
-              style: textTheme.headlineLarge
-                  ?.copyWith(color: Colors.white,fontSize: 32, fontWeight: FontWeight.bold)),
+              style: textTheme.headlineLarge?.copyWith(
+                  color: Colors.white,
+                  fontSize: 32,
+                  fontWeight: FontWeight.bold)),
           Container(
             margin: EdgeInsets.symmetric(vertical: 18),
             height: 6,
@@ -84,43 +86,6 @@ class ExperienceSection extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Container(
-                    height: 69,
-                    width: 0.5,
-                    decoration: BoxDecoration(
-                      color: Colors.grey,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 16,
-                    width: 16,
-                    child: Center(
-                      child: Stack(
-                        children: [
-                          Center(
-                            child: Container(
-                              height: 16,
-                              width: 16,
-                              decoration: BoxDecoration(
-                                color: Colors.white10,
-                                shape: BoxShape.circle,
-                              ),
-                            ),
-                          ),
-                          Center(
-                            child: Container(
-                              height: 8,
-                              width: 8,
-                              decoration: BoxDecoration(
-                                color: Colors.blueAccent,
-                                shape: BoxShape.circle,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
                 ],
               ),
               SizedBox(width: 12),
@@ -131,8 +96,7 @@ class ExperienceSection extends StatelessWidget {
                   children: [
                     SectionHeader(title: 'Education'),
                     ResumeItem(
-                      title:
-                          'Atmiya University',
+                      title: 'Atmiya University',
                       subtitle:
                           'Bachelor of Technology in Information Technology (B.Tech. IT)',
                       duration: '2019 – 2023',
@@ -238,42 +202,6 @@ class ExperienceSection extends StatelessWidget {
                         ],
                       ),
                     ),
-                  ),Container(
-                    height: 260,
-                    width: 0.5,
-                    decoration: BoxDecoration(
-                      color: Colors.grey,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 16,
-                    width: 16,
-                    child: Center(
-                      child: Stack(
-                        children: [
-                          Center(
-                            child: Container(
-                              height: 16,
-                              width: 16,
-                              decoration: BoxDecoration(
-                                color: Colors.white10,
-                                shape: BoxShape.circle,
-                              ),
-                            ),
-                          ),
-                          Center(
-                            child: Container(
-                              height: 8,
-                              width: 8,
-                              decoration: BoxDecoration(
-                                color: Colors.blueAccent,
-                                shape: BoxShape.circle,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
                   ),
                 ],
               ),
@@ -328,14 +256,20 @@ class ExperienceSection extends StatelessWidget {
                 fixedSize: Size(250, 50),
                 foregroundColor: Colors.black,
                 backgroundColor: Colors.blueAccent,
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadiusDirectional.circular(16)),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadiusDirectional.circular(16)),
               ),
               onPressed: () {
                 // Trigger download logic or navigation to CV URL
               },
-              icon: const Icon(Icons.download, color: Colors.black,),
-              label: const Text('Download Resume', style: TextStyle(fontWeight: FontWeight.bold)),
+              icon: const Icon(
+                Icons.download,
+                color: Colors.black,
+              ),
+              label: const Text('Download Resume',
+                  style: TextStyle(fontWeight: FontWeight.bold)),
             ),
           )
         ],
