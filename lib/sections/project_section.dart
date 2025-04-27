@@ -12,6 +12,13 @@ class ProjectSection extends StatelessWidget {
       'url': 'https://pub.dev/packages/single_touch_gesture',
     },
     {
+      'title': 'Miracle Cloud',
+      'type': 'Application',
+      'asset': 'images/img.png',
+      'url':
+          'https://play.google.com/store/apps/details?id=com.miracleerp.cloud',
+    },
+    {
       'title': 'Brick Breaker',
       'type': 'Application',
       'asset': 'images/img.png',
@@ -22,13 +29,6 @@ class ProjectSection extends StatelessWidget {
       'type': 'Application',
       'asset': 'images/img.png',
       'url': 'https://github.com/YashrajsinhYz/Task-Management-App',
-    },
-    {
-      'title': 'Miracle Cloud',
-      'type': 'Application',
-      'asset': 'images/img.png',
-      'url':
-          'https://play.google.com/store/apps/details?id=com.miracleerp.cloud',
     },
   ];
 

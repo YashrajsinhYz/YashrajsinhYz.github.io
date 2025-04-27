@@ -232,7 +232,7 @@ class _PortfolioHomeState extends State<PortfolioHome> {
       url = "mailto:$value";
     } else if (label == "PHONE") {
       url = "tel:$value";
-    } else if (label == "LINKEDIN") {
+    } else if (label == "LINKEDIN" || label == "GITHUB") {
       url = value.startsWith("http") ? value : "https://$value";
     }
 
